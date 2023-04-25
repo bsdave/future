@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   root  "index#index"
+  post "/api/v1/atmos_pay/create_payment", to: "index#create_payment"
 end
