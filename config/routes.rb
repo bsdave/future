@@ -6,4 +6,5 @@ Rails.application.routes.draw do
 
   root  "index#index"
   post "/api/v1/atmos_pay/create_payment", to: "index#create_payment"
+  post "/api/v1/salv/screening_alert", to: "index#screening_alert"
 end
