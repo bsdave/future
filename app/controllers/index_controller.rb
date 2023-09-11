@@ -4,6 +4,9 @@ class IndexController < ApplicationController
   def index
   end
 
+  def about
+  end
+
   def create_payment
     Rails.logger.warn(params)
 
