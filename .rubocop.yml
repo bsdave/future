@@ -1,0 +1,8 @@
+# .rubocop.yml
+inherit_from: .rubocop_todo.yml
+require:
+  - rubocop-rails
+AllCops:
+  NewCops: enable
+RSpec/FilePath:
+  Enabled: false

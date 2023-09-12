@@ -11,19 +11,19 @@ class IndexController < ApplicationController
     Rails.logger.warn(params)
 
     render json: {
-      "status": 1,
-      "message": "Успешно"
+      status: 1,
+      message: "Успешно"
     }
   end
 
   def screening_alert
-    Rails.logger.warn("#" * 10 + "screening_alert" + "#" * 10)
+    Rails.logger.warn(("#" * 10) + "screening_alert" + ("#" * 10))
     Rails.logger.warn(request.headers["X-Salv-Token"])
     Rails.logger.warn(params)
-    Rails.logger.warn("#" * 10 + "screening_alert" + "#" * 10)
+    Rails.logger.warn(("#" * 10) + "screening_alert" + ("#" * 10))
 
     render json: {
-      "response": "stubbed"
+      response: "stubbed"
     }
   end
 end
