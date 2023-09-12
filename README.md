@@ -1,26 +1,20 @@
-# README
+# Future pet project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##### Dependencies
+- Ruby 3.2.2
+- Rails 7
 
-Things you may want to cover:
+##### Local development
 
-* Ruby version
+You can start the rails server using the command given below.
 
-* System dependencies
+```bash
+rails s
+```
 
-* Configuration
+And now you can visit the site with the URL http://localhost:3000
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
+##### Deploy
+```bash
 cap production deploy
-
-* ...
+```
