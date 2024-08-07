@@ -963,8 +963,6 @@ function createLights(){
 	// Parallel rays
 	shadowLight = new THREE.DirectionalLight(0xffffff, .9);
 
-
-
 	shadowLight.position.set(0,350,350);
 	shadowLight.castShadow = true;
 
@@ -1582,34 +1580,27 @@ function createFox(){
 	scene.add(fox.mesh);
 }
 
-
 function updatePlane() {
-
-	var targetY = normalize(mousePos.y,-.75,.75, 50, 190);
-	var targetX = normalize(mousePos.x,-.75,.75,-100, -20);
+	var targetX = normalize(mousePos.x, -1, 1, -300, 300);
+	var targetY = normalize(mousePos.y, -0.65, 0.65, 25, 300);
 	
 	// Move the plane at each frame by adding a fraction of the remaining distance
 	airplane.mesh.position.y += (targetY-airplane.mesh.position.y)*0.1;
-
 	airplane.mesh.position.x += (targetX-airplane.mesh.position.x)*0.1;
 
 	// Rotate the plane proportionally to the remaining distance
 	airplane.mesh.rotation.z = (targetY-airplane.mesh.position.y)*0.0128;
-	airplane.mesh.rotation.x = (airplane.mesh.position.y-targetY)*0.0064;
-	airplane.mesh.rotation.y = (airplane.mesh.position.x-targetX)*0.0064;
-
-	airplane.propeller.rotation.x += 0.3;
+	airplane.mesh.rotation.x = (airplane.mesh.position.x-targetX)*0.0064;
+	airplane.mesh.rotation.y = (airplane.mesh.position.y-targetY)*0.0064;
 }
 
-function normalize(v,vmin,vmax,tmin, tmax){
-
-	var nv = Math.max(Math.min(v,vmax), vmin);
-	var dv = vmax-vmin;
-	var pc = (nv-vmin)/dv;
-	var dt = tmax-tmin;
-	var tv = tmin + (pc*dt);
-	return tv;
-
+function normalize(v, vmin, vmax, tmin, tmax){
+  var nv = Math.max(Math.min(v, vmax), vmin);
+  var dv = vmax - vmin;
+  var pc = (nv - vmin) / dv;
+  var dt = tmax - tmin;
+  var tv = tmin + (pc * dt);
+  return tv;
 }
 
 
@@ -1618,6 +1609,8 @@ function loop(){
   orbit.mesh.rotation.z += .001;
   sky.mesh.rotation.z += .003;
   forest.mesh.rotation.z += .005;
+  airplane.propeller.rotation.x += 0.3;
+
   updatePlane();
 
   renderer.render(scene, camera);
@@ -1625,8 +1618,9 @@ function loop(){
 }
 
 function handleMouseMove (event) {
-	var tx = -1 + (event.clientX / WIDTH)*2;
-	var ty = 1 - (event.clientY / HEIGHT)*2;
+  var tx = -1 + (event.clientX / WIDTH) * 2;
+  var ty = 1 - (event.clientY / HEIGHT) * 2;
+
 	mousePos = {x:tx, y:ty};	
 }
 
@@ -1648,5 +1642,44 @@ function init(event) {
 }
 
 window.addEventListener('load', init, false);
+
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+    e = e || window.event;
+
+
+    if (e.keyCode == '38') {
+			if(mousePos.y > 1) return; 
+			var tx = mousePos.x;
+  		var ty = mousePos.y + 0.09;
+
+			mousePos = {x:tx, y:ty};
+    }
+    else if (e.keyCode == '40') {
+			if(mousePos.x < -1) return; 
+
+			var tx = mousePos.x;
+  		var ty = mousePos.y - 0.09;
+
+			mousePos = {x:tx, y:ty};
+    }
+    else if (e.keyCode == '37') {
+			if(mousePos.x < -0.6) return;
+
+			var tx = mousePos.x - 0.09;
+  		var ty = mousePos.y;
+
+			mousePos = {x:tx, y:ty};
+    }
+    else if (e.keyCode == '39') {
+			if (mousePos.x > 0.6) return; 
+
+			var tx = mousePos.x + 0.09;
+  		var ty = mousePos.y;
+
+			mousePos = {x:tx, y:ty};
+    }
+}
 
 </script>
