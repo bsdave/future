@@ -22,7 +22,7 @@
   <body>
   <script>
     var span = document.createElement('span');
-    span.innerHTML = window.Telegram.WebApp.initDataUnsafe.user
+    span.innerHTML = JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user, null, 2);
     document.body.appendChild(span);
   </script>
   </body>
