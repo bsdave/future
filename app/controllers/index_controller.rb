@@ -1,10 +1,15 @@
 class IndexController < ApplicationController
   protect_from_forgery with: :null_session, only: [:create_payment, :screening_alert]
 
+  layout false, only: [:loot]
+
   def index
   end
 
   def about
+  end
+
+  def loot
   end
 
   def create_payment
