@@ -1,29 +1,49 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="ru">
+<head>
     <title>Future</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Telegram WebApp JS -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
+    <!-- Rails meta tags -->
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-  </head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MJHYBB0L3F"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-MJHYBB0L3F');
-  </script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MJHYBB0L3F"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-MJHYBB0L3F');
+    </script>
 
-  <body>
-  <script>
-    var span = document.createElement('span');
-    span.innerHTML = JSON.stringify(window.Telegram.WebApp.initDataUnsafe.user, null, 2);
-    document.body.appendChild(span);
-  </script>
-  </body>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Бич инфо:</h1>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ul = document.createElement('ul');
+
+            for (let key in window.Telegram.WebApp.initDataUnsafe.user) {
+                if (window.Telegram.WebApp.initDataUnsafe.user.hasOwnProperty(key)) {
+                    const li = document.createElement('li');
+                    li.textContent = `${key}: ${window.Telegram.WebApp.initDataUnsafe.user[key]}`;
+                    ul.appendChild(li);
+                }
+            }
+
+            document.body.appendChild(ul);
+        });
+    </script>
+</body>
 </html>
